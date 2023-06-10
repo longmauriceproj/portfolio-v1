@@ -100,6 +100,17 @@ function Waveform(props: WaveformProps) {
   );
 }
 
+function MailIcon(props: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
+      <path
+        fillRule="evenodd"
+        d="M6 5a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3V8a3 3 0 0 0-3-3H6Zm.245 2.187a.75.75 0 0 0-.99 1.126l6.25 5.5a.75.75 0 0 0 .99 0l6.25-5.5a.75.75 0 0 0-.99-1.126L12 12.251 6.245 7.187Z"
+      />
+    </svg>
+  );
+}
+
 function ArrowDownIcon(props: IconProps) {
   return (
     <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" {...props}>
@@ -288,16 +299,32 @@ export function Layout({ children }: LayoutProps) {
       <footer className="border-t border-slate-200 bg-slate-50 py-10 pb-40 sm:py-16 sm:pb-32 lg:hidden">
         <div className="mx-auto px-4 sm:px-6 md:max-w-2xl md:px-4">
           <AboutSection />
-          <h2 className="mt-8 flex items-center font-mono text-sm font-medium leading-7 text-slate-900">
-            <span>Follow on</span>
-          </h2>
-          <div className="mt-2 flex gap-6">
-            {social.map((item) => (
-              <a key={item.name} href={item.href}>
-                <span className="sr-only">{item.name}</span>
-                <item.icon className="h6 w-6 fill-violet-300 hover:fill-violet-500" />
+          <div className="mt-2 flex justify-between">
+            <div>
+              <h2 className="mt-8 flex items-center font-mono text-sm font-medium leading-7 text-slate-900">
+                <span>Follow on</span>
+              </h2>
+              <div className="flex gap-6">
+                {social.map((item) => (
+                  <a key={item.name} href={item.href}>
+                    <span className="sr-only">{item.name}</span>
+                    <item.icon className="h6 w-6 fill-violet-300 hover:fill-violet-500" />
+                  </a>
+                ))}
+              </div>
+            </div>
+            <div>
+              <h2 className="mt-8 flex items-center font-mono text-sm font-medium leading-7 text-slate-900">
+                <span>Contact me</span>
+              </h2>
+              <a
+                href="mailto:long.maurice.ucla@gmail.com"
+                className="flex justify-end"
+              >
+                <span className="sr-only">Email</span>
+                <MailIcon className="h6 w-6 fill-violet-300 hover:fill-violet-500" />
               </a>
-            ))}
+            </div>
           </div>
         </div>
       </footer>

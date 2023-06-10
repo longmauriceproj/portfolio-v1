@@ -15,14 +15,14 @@ function ArrowTopRightOnSquareIcon(props: IconProps) {
     <svg
       fill="none"
       viewBox="0 0 24 24"
-      stroke-width="1.5"
+      strokeWidth="1.5"
       stroke="currentColor"
       aria-hidden="true"
       {...props}
     >
       <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
         d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
       />
     </svg>
@@ -37,7 +37,7 @@ function ProjectEntry() {
     description:
       "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugiat veniam adipisci ratione nisi suscipit cumque deleniti necessitatibus eveniet aperiam enim.",
     stack: [
-      "NextJS",
+      "Next.js",
       "NextAuth",
       "TRPC",
       "Prisma",
@@ -66,7 +66,9 @@ function ProjectEntry() {
           </p>
           <div className="mt-3 flex flex-wrap items-center gap-x-4">
             {project.stack.map((tech) => (
-              <p className="mt-1 font-mono text-xs text-slate-500">{tech}</p>
+              <p key={tech} className="mt-1 font-mono text-xs text-slate-500">
+                {tech}
+              </p>
             ))}
           </div>
           <div className="mt-8 flex items-center gap-4">
