@@ -1,4 +1,4 @@
-import { Fragment, ReactNode, useId, useState } from "react";
+import { useId, useState, type ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import clsx from "clsx";
@@ -8,11 +8,6 @@ import logoAppliedMedical from "~/images/logos/appliedMedical.png";
 import logoInterson from "~/images/logos/interson.png";
 import logoBaxter from "~/images/logos/baxter.png";
 import { GitHubIcon, LinkedInIcon } from "./SocialIcons";
-
-interface TinyWaveFormIconProps {
-  colors?: string[];
-  className?: string;
-}
 
 interface IconProps {
   className?: string;
@@ -30,10 +25,6 @@ interface LayoutProps {
   children: ReactNode;
 }
 
-interface SocialLinkProps {
-  icon: JSX.Element;
-}
-
 function randomBetween(min: number, max: number, seed = 1) {
   return () => {
     let rand = Math.sin(seed++) * 10000;
@@ -43,8 +34,8 @@ function randomBetween(min: number, max: number, seed = 1) {
 }
 
 function Waveform(props: WaveformProps) {
-  let id = useId();
-  let bars = {
+  const id = useId();
+  const bars = {
     total: 100,
     width: 2,
     gap: 2,
@@ -52,7 +43,7 @@ function Waveform(props: WaveformProps) {
     maxHeight: 100,
   };
 
-  let barHeights = Array.from(
+  const barHeights = Array.from(
     { length: bars.total },
     randomBetween(bars.minHeight, bars.maxHeight)
   );
@@ -82,7 +73,7 @@ function Waveform(props: WaveformProps) {
             <rect
               key={index}
               width={bars.width}
-              height={`${barHeights[index]}%`}
+              height={barHeights[index]}
               x={bars.gap * (index + 1) + bars.width * index}
               fill={`url(#${id}-fade)`}
             />
@@ -146,7 +137,7 @@ function PersonIcon(props: IconProps) {
 }
 
 function AboutSection(props: AboutSectionProps) {
-  let [isExpanded, setIsExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   return (
     <section {...props}>
@@ -185,13 +176,22 @@ function AboutSection(props: AboutSectionProps) {
 }
 
 const social = [
-  { name: "Github", href: "#", icon: GitHubIcon },
-  { name: "LinkedIn", href: "#", icon: LinkedInIcon },
+  {
+    name: "Github",
+    href: "https://www.github.com/longmauriceproj",
+    icon: GitHubIcon,
+  },
+  {
+    name: "LinkedIn",
+    href: "https://www.linkedin.com/in/maurice-long",
+    icon: LinkedInIcon,
+  },
 ];
 
 const resume = [
   {
     company: "Applied Medical",
+    url: "https://appliedmedical.com",
     title: "Front-end Developer",
     logo: logoAppliedMedical,
     start: "2023",
@@ -199,13 +199,15 @@ const resume = [
   },
   {
     company: "Interson",
+    url: "https://interson.com",
     title: "Project Engineer",
     logo: logoInterson,
     start: "2018",
     end: "2019",
   },
   {
-    company: "Baxter Internation",
+    company: "Baxter International",
+    url: "https://www.baxter.com",
     title: "Continuous Improvement Lead",
     logo: logoBaxter,
     start: "2011",
@@ -221,7 +223,13 @@ export function Layout({ children }: LayoutProps) {
           <span className="font-mono text-slate-500">Follow on</span>
           <div className="mt-8 flex gap-6">
             {social.map((item) => (
-              <a key={item.name} href={item.href}>
+              <a
+                key={item.name}
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={item.name}
+              >
                 <span className="sr-only">{item.name}</span>
                 <item.icon className="h6 w-6 fill-violet-300 hover:fill-violet-500" />
               </a>
@@ -265,7 +273,9 @@ export function Layout({ children }: LayoutProps) {
               {resume.map((item) => (
                 <li key={item.company} className="flex">
                   <a
-                    href="/"
+                    href={item.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="group flex items-center"
                     aria-label={item.company}
                   >
@@ -306,7 +316,13 @@ export function Layout({ children }: LayoutProps) {
               </h2>
               <div className="flex gap-6">
                 {social.map((item) => (
-                  <a key={item.name} href={item.href}>
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={item.name}
+                  >
                     <span className="sr-only">{item.name}</span>
                     <item.icon className="h6 w-6 fill-violet-300 hover:fill-violet-500" />
                   </a>
@@ -320,6 +336,7 @@ export function Layout({ children }: LayoutProps) {
               <a
                 href="mailto:long.maurice.ucla@gmail.com"
                 className="flex justify-end"
+                aria-aria-label="Gmail"
               >
                 <span className="sr-only">Email</span>
                 <MailIcon className="h6 w-6 fill-violet-300 hover:fill-violet-500" />

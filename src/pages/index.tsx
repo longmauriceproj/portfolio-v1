@@ -45,8 +45,9 @@ function ProjectEntry() {
       "Supabase",
       "Vercel",
     ],
-    githubUrl: "#",
-    livePreviewUrl: "#",
+    githubUrl: "https://github.com/longmauriceproj/four-kings",
+    showGithubUrl: false,
+    livePreviewUrl: "https://itsfourkings.com",
   };
   return (
     <article
@@ -72,18 +73,20 @@ function ProjectEntry() {
             ))}
           </div>
           <div className="mt-8 flex items-center gap-4">
-            <a
-              href={project.githubUrl}
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Github"
-            >
-              <GitHubIcon className="h-7 w-7 fill-violet-300 hover:fill-violet-500" />
-            </a>
+            {project.showGithubUrl && (
+              <a
+                href={project.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Github"
+              >
+                <GitHubIcon className="h-7 w-7 fill-violet-300 hover:fill-violet-500" />
+              </a>
+            )}
             <a
               href={project.livePreviewUrl}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               aria-label="Live preview"
             >
               <ArrowTopRightOnSquareIcon className="h-7 w-7 stroke-violet-300 hover:stroke-violet-500" />
